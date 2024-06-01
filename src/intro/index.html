@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/intro/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thought garden.</title>
+    <script type="module" src="/intro/index.js" defer></script>
+  </head>
+
+  <body>
+    <img id="logo" src="/intro/tg-logo.svg"></p>
+    
+    <p id="welcome">Welcome to thought garden.
+      Thought garden could be a journal, personal blog or just a garden for your thoughts.
+      Select a folder to store your thoughts.
+    </p>
+
+    <div id="butt">
+    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders" onclick="window.__TAURI__.tauri.invoke('opendialog')">CHOOSE FOLDER</button>
+    </div>
+  </body>
+</htm

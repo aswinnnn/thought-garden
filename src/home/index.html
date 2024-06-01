@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const boxes = document.querySelectorAll('.post-bg');
+      boxes.forEach(box => {
+        let url = box.getAttribute('data-src');
+        let cssraw = [];
+        if (url) {
+          // box.style.backgroundImage = `url(${url})`;
+          const cssRule = `
+                        .post-bg[data-src="${url}"] {
+                            background-image: 
+                                linear-gradient(to bottom, rgba(255, 255, 255, 0.158), rgba(0, 0, 0, 0.388)), 
+                                url(${url});
+                        }
+                        .post-bg[data-src="${url}"]:hover {
+                            background-image: 
+                                linear-gradient(to bottom, rgba(255, 255, 255, 0.158), rgba(0, 0, 0, 0.388)), 
+                                url(${url}), 
+                                linear-gradient(to top, rgba(255, 255, 255, 0.112), rgba(0, 0, 0, 0.338)), 
+                                url(${url});
+                        }
+                    `;
+          cssraw.push(cssRule);
+        }
+        let cssp = cssraw.join('\n');
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(cssp));
+        document.head.appendChild(style);
+      });
+    });
+  </script>
+</head>
+
+<body class="light" id="body">
+  <div class="switch">
+    <input name="switch" id="one" type="radio" checked aria-checked="true" />
+    <label for="one" class="switch__label"> 🏡</label>
+    <input name="switch" id="two" type="radio" />
+    <label for="two" class="switch__label">🌻</label>
+    <!-- <input name="switch" id="three" type="radio" />
+      <label for="three" class="switch__label">?</label> -->
+    <div class="switch__indicator" />
+  </div>
+  </div>
+  <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
+  <main class="main-content">
+    <div class="post-bg" data-src="../assets/girl-garden-border-cover.svg">
+      <div class="post-content">
+        <h4>this is a post title </h4><br>
+        <p> this is a post i made a long time ago about blah blah blah...</p>
+      </div>
+    </div>
+
+    <br>
+    <div class="post-bg" data-src="../assets/MaidenInGarden.svg">
+      <div class="post-content">
+        <h4>this is a post title </h4><br>
+        <p> this is a post i made a long time ago about blah blah blah...</p>
+      </div>
+    </div>
+
+    <br>
+    <div class="post-bg" data-src="../assets/macabre.svg">
+      <div class="post-content">
+        <h4>this is a post title </h4><br>
+        <p> this is a post i made a long time ago about blah blah blah...</p>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
