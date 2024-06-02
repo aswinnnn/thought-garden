@@ -5,23 +5,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
-  <link rel="stylesheet" href="/create/style.css">
+  <link rel="stylesheet" href="create/style.css">
+  <script src="../assets/htmx.min.js"></script>
+  <script>
+    function csshome() {
+      
+      const boxes = document.querySelectorAll('.post-bg');
+      boxes.forEach(box => {
+        let url = box.getAttribute('data-src');
+        let cssraw = [];
+        if (url) {
+          // box.style.backgroundImage = `url(${url})`;
+          const cssRule = `
+                        .post-bg[data-src="${url}"] {
+                            background-image: 
+                                linear-gradient(to bottom, rgba(255, 255, 255, 0.158), rgba(0, 0, 0, 0.388)), 
+                                url(${url});
+                        }
+                        .post-bg[data-src="${url}"]:hover {
+                            background-image: 
+                                linear-gradient(to bottom, rgba(255, 255, 255, 0.158), rgba(0, 0, 0, 0.388)), 
+                                url(${url}), 
+                                linear-gradient(to top, rgba(255, 255, 255, 0.112), rgba(0, 0, 0, 0.338)), 
+                                url(${url});
+                        }
+                    `;
+          cssraw.push(cssRule);
+        }
+        let cssp = cssraw.join('\n');
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(cssp));
+        document.head.appendChild(style);
+      });
+    };
+
+    function changecontent() {
+      let m = document.querySelector('.main-content');
+      if (m) {
+        let at = m.getAttribute('data-content');
+        if (at == "create") {
+          m.setAttribute('data-content', 'home')
+        } else {
+          m.setAttribute('data-content', 'create')
+        }
+      }
+    }
+  </script>
 </head>
 
 <body class="light" id="body">
-    <div class="switch">
-      <input name="switch" id="one" type="radio"/>
-      <label for="one" class="switch__label"> 🏡</label>
-      <input name="switch" id="two" type="radio" checked />
-      <label for="two" class="switch__label">🌻</label>
-      <!-- <input name="switch" id="three" type="radio" />
+  <div class="switch">
+    <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content" hx-swap="innerHTML" onclick="changecontent();setTimeout(csshome, 500);" />
+    <label for="one" class="switch__label"> 🏡</label>
+    <input name="switch" id="two" type="radio" checked />
+    <label for="two" class="switch__label">🌻</label>
+    <!-- <input name="switch" id="three" type="radio" />
       <label for="three" class="switch__label">?</label> -->
-      <div class="switch__indicator"/>
-    </div>
-    </div>
+    <div class="switch__indicator" />
+  </div>
+  </div>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content">
-    <br>
+  <main class="main-content" data-content="create">
+    <br style="opacity: 0;">
     <article class="article">
       <h4 class="date">Friday, May 3, 2024</h4>
       <h2 class="article-title">Exploring the Power of Purple</h2>
