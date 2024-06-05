@@ -9,7 +9,7 @@
   <script src="../assets/htmx.min.js"></script>
   <script>
     function csshome() {
-      
+
       const boxes = document.querySelectorAll('.post-bg');
       boxes.forEach(box => {
         let url = box.getAttribute('data-src');
@@ -51,14 +51,28 @@
         }
       }
     }
+    function mode() {
+      let body = document.getElementById("body");
+      let butt = document.getElementById("butt");
+      if (body.className.match("dark")) {
+        body.className = "light"
+        butt.innerHTML = "🌙"
+      }
+      else {
+        body.className = "dark"
+        butt.innerHTML = "🌞"
+      }
+    }
   </script>
 </head>
 
 <body class="light" id="body">
   <div class="switch">
-    <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content" hx-swap="innerHTML" onclick="changecontent();setTimeout(csshome, 500);" />
+    <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
+      hx-swap="innerHTML" onclick="changecontent();setTimeout(csshome, 500);" tabindex="0" />
     <label for="one" class="switch__label"> 🏡</label>
-    <input name="switch" id="two" type="radio" checked />
+    <input name="switch" id="two" type="radio" hx-get="/api/create" hx-trigger="click" hx-target=".main-content"
+      hx-swap="innerHTML" onclick="changecontent();" tabindex="1" checked />
     <label for="two" class="switch__label">🌻</label>
     <!-- <input name="switch" id="three" type="radio" />
       <label for="three" class="switch__label">?</label> -->
@@ -71,7 +85,8 @@
     <article class="article">
       <h4 class="date">Friday, May 3, 2024</h4>
       <h2 class="article-title" contenteditable="true" data-ph="your title for the day"></h2>
-      <p class="article-content" contenteditable="true" data-ph="your content goes here"></p>
+      <hr class="hbar">
+      <p class="article-content" contenteditable="true" data-ph="your content goes here" data-height="100vh"></p>
     </article>
 
   </main>
