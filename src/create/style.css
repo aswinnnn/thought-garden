@@ -49,6 +49,15 @@ body {
   padding: 0.5rem;
 }
 
+.main-content.htmx-swapping {
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.main-content.htmx-settling {
+  opacity: 0;
+  transition: all 600ms ease-in-out;
+}
 .article {
   margin-top: 1.8rem;
   margin-bottom: 2rem;
@@ -102,6 +111,7 @@ body {
 }
 
 /* ----------------- MENU --------------------- */
+
 
 
 .switch {
@@ -221,6 +231,7 @@ h4 {
   font-size: 4vw;
   font-kerning: none;
 }
+
 /* ------------------- EDITOR ----------------------  */
 .hbar {
   opacity: 0;
@@ -238,11 +249,13 @@ h4 {
   outline: none !important;
   cursor: text;
 }
+
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus-visible {
   background-color: rgba(205, 205, 205, 0.139);
   background-position-y: bottom;
 }
+
 [contenteditable="true"]:active:not(:empty),
 [contenteditable="true"]:focus:not(:empty) {
   text-align: inherit;
