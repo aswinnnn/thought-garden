@@ -67,13 +67,23 @@ async fn redirect(to: String, app: tauri::AppHandle) {
     }
 }
 
+#[tauri::command]
+async fn call_js(function: String, args: String, app: tauri::AppHandle) {
+    if let Some(main_win) = app.get_window("main") {
+        let _ = main_win.eval(&format!(
+            "{function}({args});"));
+        println!("[TG-BACKEND] evaluating {function}({args})")
+    }
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             opendialog,
             checkconfig,
             start_backend,
-            redirect
+            redirect,
+            call_js
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

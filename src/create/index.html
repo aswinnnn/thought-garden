@@ -9,7 +9,6 @@
   <script src="../assets/htmx.min.js"></script>
   <script>
     function csshome() {
-
       const boxes = document.querySelectorAll('.post-bg');
       boxes.forEach(box => {
         let url = box.getAttribute('data-src');
@@ -63,13 +62,18 @@
         butt.innerHTML = "🌞"
       }
     }
+
+    function combinechange() {
+      setTimeout(csshome, 10);
+      changecontent();
+    }
   </script>
 </head>
 
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
-      hx-swap="innerHTML swap:1s" onclick="changecontent();setTimeout(csshome, 1010);" tabindex="0" />
+      hx-swap="innerHTML swap:1s" onclick="setTimeout(combinechange, 1000)" tabindex="0" />
     <label for="one" class="switch__label"> 🏡</label>
     <input name="switch" id="two" type="radio" hx-get="/api/create" hx-trigger="click" hx-target=".main-content"
       hx-swap="innerHTML" onclick="changecontent();" tabindex="1" checked />
