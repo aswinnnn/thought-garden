@@ -63,20 +63,16 @@
       }
     }
 
-    function combinechange() {
-      setTimeout(csshome, 10);
-      changecontent();
-    }
   </script>
 </head>
 
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
-      hx-swap="innerHTML swap:1s" onclick="setTimeout(combinechange, 1000)" tabindex="0" />
+      hx-swap="innerHTML swap:1s"  tabindex="0" />
     <label for="one" class="switch__label"> 🏡</label>
     <input name="switch" id="two" type="radio" hx-get="/api/create" hx-trigger="click" hx-target=".main-content"
-      hx-swap="innerHTML" onclick="changecontent();" tabindex="1" checked />
+      hx-swap="innerHTML" " tabindex="1" checked />
     <label for="two" class="switch__label">🌻</label>
     <!-- <input name="switch" id="three" type="radio" />
       <label for="three" class="switch__label">?</label> -->
@@ -84,7 +80,7 @@
   </div>
   </div>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content" data-content="create">
+  <main class="main-content" data-content="create" hx-on::after-settle="changecontent();csshome()">
     <br style="opacity: 0;">
     <article class="article">
       <h4 class="date">Friday, May 3, 2024</h4>
