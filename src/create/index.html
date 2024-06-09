@@ -64,6 +64,16 @@
     }
 
   </script>
+  <script>
+    function update_buffer() {
+      let content = document.querySelector(".article-content").textContent;
+      if (content) {
+        window.__TAURI__.tauri.invoke('update_buffer', {content: content})
+      }
+    }
+
+
+  </script>
 </head>
 
 <body class="light" id="body">
