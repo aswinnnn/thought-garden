@@ -33,7 +33,7 @@ async fn start_backend(app: tauri::AppHandle) -> Result<(), ()> {
 
 #[tauri::command]
 async fn checkconfig(app: tauri::AppHandle) -> bool {
-    let configfound = true;
+    let configfound = false;
     configfound
     // if let Some(main_win) = app.get_window("main") {
     //     if !configfound {

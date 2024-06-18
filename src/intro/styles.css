@@ -24,22 +24,24 @@
   
   #logo {
     display: flex;
-    font-size:  75px;
     margin-left: auto;
     margin-right: auto;
-    height: 200px;
-    width: 200px;
+    height: 30vh;
+    width: 20vw;
     padding: 1rem;
   }
   
   #welcome {
-    line-height: 5vh;
-    font-size: 28px;
-    padding: 4.5rem;
+    line-height: 2.5rem;
+    font-size: 1.8rem;
+    padding: 2rem;
+    font-family: monospace;
+    font-weight: 380;
+    list-style-image: url("/assets/birdflower.svg");
+    list-style-position: inside;
   }
   
   #butt {
-    margin-bottom: 50vh;
     padding-left: 4.5rem;
     padding-bottom: 1rem;
   }
@@ -47,7 +49,7 @@
   
   input,
   button {
-    border-radius: 2px;
+    border-radius: 3px;
     border: 1px solid transparent;
     font-size: 1rem;
     font-family: sans-serif;
@@ -55,7 +57,7 @@
     background-color: #cfaaaa;
     color: #0f0f0f;
     transition: border-color 0.25s;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.425);
   }
   
   button:hover {
@@ -79,7 +81,22 @@
   button {
     outline: none;
   }
-  
+
+  @media (max-width: 747px) {
+    #welcome {
+      line-height: 2.5rem;
+      font-size: 1.4rem;
+      transition: all 1s;
+      padding: 1.5rem;
+      list-style-image: url("/assets/birdflower.svg");
+    }
+
+    #logo {
+      height: 30vh;
+      width: 30vw;
+      padding: 1rem;
+    }
+  }
   
   @media (prefers-color-scheme: dark) {
   }

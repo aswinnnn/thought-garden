@@ -10,14 +10,20 @@
 
   <body>
     <img id="logo" src="/intro/tg-logo.svg"></p>
-    
-    <p id="welcome">Welcome to thought garden.
-      Thought garden could be a journal, personal blog or just a garden for your thoughts.
-      Select a folder to store your thoughts.
-    </p>
+    <ol>
+    <li id="welcome">🏡 thought garden is a garden for your thoughts. </li>
+    <li id="welcome">🌻 it can find patterns in your life, and you get to decide whether its good or bad for you.
+    <br> </li>
+    <li id="welcome">🤎 all offline, encrypted and open source.</li>
+    </ol>    
+
+    <br>
 
     <div id="butt">
-    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders" onclick="window.__TAURI__.tauri.invoke('opendialog')">CHOOSE FOLDER</button>
+    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders" onclick="window.__TAURI__.tauri.invoke('createconfig')">GET STARTED</button>
+    </div>
+    <div id="butt">
+    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders" onclick="window.__TAURI__.tauri.invoke('importconfig')">IMPORT OLDER JOURNALS</button>
     </div>
   </body>
 </htm
