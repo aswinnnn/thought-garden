@@ -67,10 +67,34 @@
   <script>
     function update_buffer() {
       let content = document.querySelector(".article-content").textContent;
-      if (content) {
-        window.__TAURI__.tauri.invoke('update_buffer', {content: content})
+      let title = document.querySelector(".article-title").textContent;
+      let id = document.querySelector(".article").getAttribute('data-id');
+      if (id) {
+        window.__TAURI__.tauri.invoke('update_buffer', { content: content,
+        title: title, id: id })
+      }
+      else {
+        let v = window.__TAURI__.tauri.invoke('new_journal', { content: content,
+        title: title });
+        if (v.length() !== 1) {
+          document.querySelector(".article").setAttribute("data-id", v)
+        }
       }
     }
+
+    function debounceUpdateBuffer() {
+      let timeout;
+      const articleContent = document.querySelector('.article-content');
+
+      articleContent.addEventListener('input', function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          update_buffer();
+        }, 200);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', debounceUpdateBuffer);
 
 
   </script>
@@ -79,7 +103,7 @@
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
-      hx-swap="innerHTML swap:1s"  tabindex="0" />
+      hx-swap="innerHTML swap:1s" tabindex="0" />
     <label for="one" class="switch__label"> 🏡</label>
     <input name="switch" id="two" type="radio" hx-get="/api/create" hx-trigger="click" hx-target=".main-content"
       hx-swap="innerHTML" tabindex="1" checked />
@@ -96,7 +120,7 @@
       <h4 class="date">Friday, May 3, 2024</h4>
       <h2 class="article-title" contenteditable="true" data-ph="your title for the day"></h2>
       <hr class="hbar">
-      <p class="article-content" contenteditable="true" data-ph="your content goes here" data-height="100vh"></p>
+      <p class="article-content" contenteditable="true" data-ph="..." data-height="100vh"></p>
     </article>
 
   </main>

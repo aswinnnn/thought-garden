@@ -4,9 +4,11 @@ use std::thread::{self, spawn};
 use tauri::api::dialog::FileDialogBuilder;
 use tauri::{scope::ipc::RemoteDomainAccessScope, Manager};
 use tauri::{window, Window};
+use tg_backend::journal::Journal;
 use tokio::runtime::Runtime;
 
 use tg_backend;
+use uuid::uuid;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -68,6 +70,48 @@ async fn redirect(to: String, app: tauri::AppHandle) {
 }
 
 #[tauri::command]
+async fn new_journal(content: String, title: String) -> String {
+    let j = Journal::new(title.clone());
+    let id = match j {
+    Ok(mut journal) => {
+        journal.update_buffer(content);
+        journal.update_buffer_title(title);
+        match journal.write_to_disk() {
+            Ok(_) => {},
+            Err(e) => eprintln!("[NEW-JOURNAL][WRITE-TO-DISK] {e}"),
+        }
+        Some(journal.uuid_str)
+    },
+    Err(e) => {eprintln!("[TAURI-NEW-JOURNAL] {e}");None},
+    };
+
+    let id: String = match id {
+    Some(uuid) => uuid,
+    None => "".to_owned(),
+    };
+    id
+    // we will check if the vec is the correct one on js side
+}
+
+#[tauri::command]
+async fn update_buffer(content: String, title: String, id: String) {
+    let uuid = uuid::Uuid::parse_str(&id).expect("uuid parsing failed");
+
+    let j = Journal::init(uuid.as_bytes().to_vec());
+
+    match j {
+    Ok(mut journal) => { journal.update_buffer(content);
+        journal.update_buffer_title(title);
+        match journal.write_to_disk() {
+            Ok(o) => {},
+            Err(e) => eprintln!("[WRITE-TO-DISK] {e}"),
+        }
+     },
+    Err(e) => eprintln!("[TAURI-UPDATE-BUFFER] {e}"),
+    }
+}
+
+#[tauri::command]
 async fn call_js(function: String, args: String, app: tauri::AppHandle) {
     if let Some(main_win) = app.get_window("main") {
         let _ = main_win.eval(&format!(
@@ -76,11 +120,24 @@ async fn call_js(function: String, args: String, app: tauri::AppHandle) {
     }
 }
 
+
+#[tauri::command]
+async fn createconfig() {
+    let _ = tg_backend::config::Configuration::new();
+}
+
+#[tauri::command]
+async fn importconfig() {}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             opendialog,
             checkconfig,
+            createconfig,
+            importconfig,
+            update_buffer,
+            new_journal,
             start_backend,
             redirect,
             call_js
