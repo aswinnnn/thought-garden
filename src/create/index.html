@@ -74,11 +74,11 @@
         title: title, id: id })
       }
       else {
-        let v = window.__TAURI__.tauri.invoke('new_journal', { content: content,
-        title: title });
-        if (v.length() !== 1) {
-          document.querySelector(".article").setAttribute("data-id", v)
-        }
+        window.__TAURI__.tauri.invoke('new_journal', { content: content,
+        title: title }).then((m) => {
+          console.log("new journal detected")
+          document.querySelector(".article").setAttribute("data-id", m)
+        })
       }
     }
 
@@ -90,7 +90,7 @@
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           update_buffer();
-        }, 200);
+        }, 2000);
       });
     }
 

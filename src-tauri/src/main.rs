@@ -35,28 +35,8 @@ async fn start_backend(app: tauri::AppHandle) -> Result<(), ()> {
 
 #[tauri::command]
 async fn checkconfig(app: tauri::AppHandle) -> bool {
-    let configfound = false;
-    configfound
-    // if let Some(main_win) = app.get_window("main") {
-    //     if !configfound {
-    //         let to = "intro";
-    //         let _ = main_win.eval(&format!(
-    //             "window.location.replace('http://localhost:{}/{}')",
-    //             "3000", to
-    //         ));
-    //         println!("[TG-BACKEND] redirected to {}", to)
-    //     } else {
-    //         let to = "create";
-    //         let _ = main_win.eval(&format!(
-    //             "window.location.replace('http://localhost:{}/{}')",
-    //             "3000", to
-    //         ));
-    //         println!("[TG-BACKEND] redirected to {}", to)
-    //     }
-    // }
-
+    tg_backend::config::Configuration::exists()
 }
-
 
 #[tauri::command]
 async fn redirect(to: String, app: tauri::AppHandle) {
@@ -73,21 +53,24 @@ async fn redirect(to: String, app: tauri::AppHandle) {
 async fn new_journal(content: String, title: String) -> String {
     let j = Journal::new(title.clone());
     let id = match j {
-    Ok(mut journal) => {
-        journal.update_buffer(content);
-        journal.update_buffer_title(title);
-        match journal.write_to_disk() {
-            Ok(_) => {},
-            Err(e) => eprintln!("[NEW-JOURNAL][WRITE-TO-DISK] {e}"),
+        Ok(mut journal) => {
+            journal.update_buffer(content);
+            journal.update_buffer_title(title);
+            match journal.write_to_disk() {
+                Ok(_) => {}
+                Err(e) => eprintln!("[NEW-JOURNAL][WRITE-TO-DISK] {e}"),
+            }
+            Some(journal.uuid_str)
         }
-        Some(journal.uuid_str)
-    },
-    Err(e) => {eprintln!("[TAURI-NEW-JOURNAL] {e}");None},
+        Err(e) => {
+            eprintln!("[TAURI-NEW-JOURNAL] {e}");
+            None
+        }
     };
 
     let id: String = match id {
-    Some(uuid) => uuid,
-    None => "".to_owned(),
+        Some(uuid) => uuid,
+        None => "".to_owned(),
     };
     id
     // we will check if the vec is the correct one on js side
@@ -100,30 +83,40 @@ async fn update_buffer(content: String, title: String, id: String) {
     let j = Journal::init(uuid.as_bytes().to_vec());
 
     match j {
-    Ok(mut journal) => { journal.update_buffer(content);
-        journal.update_buffer_title(title);
-        match journal.write_to_disk() {
-            Ok(o) => {},
-            Err(e) => eprintln!("[WRITE-TO-DISK] {e}"),
+        Ok(mut journal) => {
+            journal.update_buffer(content);
+            journal.update_buffer_title(title);
+            match journal.write_to_disk() {
+                Ok(o) => {}
+                Err(e) => eprintln!("[WRITE-TO-DISK] {e}"),
+            }
         }
-     },
-    Err(e) => eprintln!("[TAURI-UPDATE-BUFFER] {e}"),
+        Err(e) => eprintln!("[TAURI-UPDATE-BUFFER] {e}"),
     }
 }
 
 #[tauri::command]
 async fn call_js(function: String, args: String, app: tauri::AppHandle) {
     if let Some(main_win) = app.get_window("main") {
-        let _ = main_win.eval(&format!(
-            "{function}({args});"));
+        let _ = main_win.eval(&format!("{function}({args});"));
         println!("[TG-BACKEND] evaluating {function}({args})")
     }
 }
 
-
 #[tauri::command]
-async fn createconfig() {
-    let _ = tg_backend::config::Configuration::new();
+async fn createconfig(app: tauri::AppHandle) {
+    match tg_backend::config::Configuration::new() {
+        Ok(o) => {
+            if let Some(main_win) = app.get_window("main") {
+                let _ = main_win.eval(&format!(
+                    "window.location.replace('http://localhost:{}/{}')",
+                    "3000", "create"
+                ));
+                println!("[TG-BACKEND](create-config) redirected to create")
+            }
+        }
+        Err(e) => eprintln!("creating config failed!!!"),
+    }
 }
 
 #[tauri::command]
