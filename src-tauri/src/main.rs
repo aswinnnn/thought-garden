@@ -87,7 +87,7 @@ async fn update_buffer(content: String, title: String, id: String) {
             journal.update_buffer(content);
             journal.update_buffer_title(title);
             match journal.write_to_disk() {
-                Ok(o) => {}
+                Ok(_) => {}
                 Err(e) => eprintln!("[WRITE-TO-DISK] {e}"),
             }
         }
@@ -106,7 +106,7 @@ async fn call_js(function: String, args: String, app: tauri::AppHandle) {
 #[tauri::command]
 async fn createconfig(app: tauri::AppHandle) {
     match tg_backend::config::Configuration::new() {
-        Ok(o) => {
+        Ok(_) => {
             if let Some(main_win) = app.get_window("main") {
                 let _ = main_win.eval(&format!(
                     "window.location.replace('http://localhost:{}/{}')",
@@ -115,7 +115,7 @@ async fn createconfig(app: tauri::AppHandle) {
                 println!("[TG-BACKEND](create-config) redirected to create")
             }
         }
-        Err(e) => eprintln!("creating config failed!!!"),
+        Err(e) => eprintln!("creating config failed: {e}"),
     }
 }
 

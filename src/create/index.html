@@ -66,8 +66,8 @@
   </script>
   <script>
     function update_buffer() {
-      let content = document.querySelector(".article-content").textContent;
-      let title = document.querySelector(".article-title").textContent;
+      let content = document.querySelector(".article-content").innerText;
+      let title = document.querySelector(".article-title").innerText;
       let id = document.querySelector(".article").getAttribute('data-id');
       if (id) {
         window.__TAURI__.tauri.invoke('update_buffer', { content: content,
@@ -114,9 +114,9 @@
   </div>
   </div>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content" data-content="create" hx-on::after-settle="changecontent();csshome()">
+  <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create" hx-trigger="load">
     <br style="opacity: 0;">
-    <article class="article">
+    <article class="article" >
       <h4 class="date">Friday, May 3, 2024</h4>
       <h2 class="article-title" contenteditable="true" data-ph="your title for the day"></h2>
       <hr class="hbar">
