@@ -105,7 +105,7 @@ async fn call_js(function: String, args: String, app: tauri::AppHandle) {
 
 #[tauri::command]
 async fn createconfig(app: tauri::AppHandle) {
-    match tg_backend::config::Configuration::new() {
+    match tg_backend::config::Configuration::create() {
         Ok(_) => {
             if let Some(main_win) = app.get_window("main") {
                 let _ = main_win.eval(&format!(

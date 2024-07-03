@@ -37,6 +37,7 @@ body {
   background-color: light-dark(var(--light-bg), var(--dark-bg));
 }
 
+
 .main-content[data-content="home"] {
   transition: all 1s;
   flex: 1;
@@ -69,6 +70,7 @@ body {
 .article {
   margin-top: 1.8rem;
   margin-bottom: 2rem;
+  margin-left: -0.5vw;
   background-color: light-dark(var(--light-article-bg), var(--dark-article-bg));
   border-radius: 0.3rem;
   padding: 1.5rem;
@@ -270,6 +272,33 @@ h4 {
   cursor: text;
 }
 
+/* ------------- SIDENAV ------------------------------ */
+
+.menu-button {
+  z-index: 1;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.sidenav {
+  display: none;
+  width: 25vw;
+  height: 100vh;
+  background-color: #F7D8E2;
+  padding-top: 8vh;
+  color:saddlebrown;
+  margin: auto;
+  transition: all 1s;
+}
+
+.option {
+  display: inline-grid;
+  grid-auto-flow: column;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 1s;
+}
+
 /* ------------ RESPONSIVE BULLSHIT ------------------- */
 
 
@@ -297,6 +326,10 @@ h4 {
 
   .article-title {
     font-size: 4vw;
+  }
+
+  .article {
+    margin-left: -4vw;
   }
 }
 

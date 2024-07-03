@@ -70,12 +70,16 @@
       let title = document.querySelector(".article-title").innerText;
       let id = document.querySelector(".article").getAttribute('data-id');
       if (id) {
-        window.__TAURI__.tauri.invoke('update_buffer', { content: content,
-        title: title, id: id })
+        window.__TAURI__.tauri.invoke('update_buffer', {
+          content: content,
+          title: title, id: id
+        })
       }
       else {
-        window.__TAURI__.tauri.invoke('new_journal', { content: content,
-        title: title }).then((m) => {
+        window.__TAURI__.tauri.invoke('new_journal', {
+          content: content,
+          title: title
+        }).then((m) => {
           console.log("new journal detected")
           document.querySelector(".article").setAttribute("data-id", m)
         })
@@ -96,10 +100,25 @@
 
     document.addEventListener('DOMContentLoaded', debounceUpdateBuffer);
 
+    function display(s) {
+    
+      let d = document.querySelector(s);
+      if (d.getAttribute('data-seen')=="true") {
+        d.setAttribute('style', 'display: none')
+        d.setAttribute('data-seen', 'false')
+      }
+      else {
+        d.setAttribute('style', 'display: unset')
+        d.setAttribute('data-seen', 'true')
+      }
+    }
 
   </script>
 </head>
-
+<img class="menu-button" src="/buttons/menu.svg" hx-get="/api/create/sidenav" 
+hx-trigger="click" hx-target=".sidenav" hx-on:click="display('.sidenav')">
+<div class="sidenav" data-seen="false">
+</div>
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
@@ -114,9 +133,10 @@
   </div>
   </div>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create" hx-trigger="load">
+  <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create"
+    hx-trigger="load">
     <br style="opacity: 0;">
-    <article class="article" >
+    <article class="article">
       <h4 class="date">Friday, May 3, 2024</h4>
       <h2 class="article-title" contenteditable="true" data-ph="your title for the day"></h2>
       <hr class="hbar">
