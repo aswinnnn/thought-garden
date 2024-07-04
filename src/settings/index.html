@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/assets/htmx.min.js"></script>
+    <link rel="stylesheet" href="/settings/style.css">
+    <link rel="stylesheet" href="/assets/theme.css">
+    <script>
+        function highlight(s) {
+            let options = document.querySelectorAll('.option');
+            for (opt of options) {
+                opt.setAttribute('data-highlighted', 'false');
+            }
+
+            s = document.querySelector(s)
+            let str = s.getAttribute('data-highlighted');
+            if (str) {
+                if (str=="true") {
+                    s.setAttribute('data-highlighted', 'false')
+                }
+                else {
+                    s.setAttribute('data-highlighted', 'true')
+                }
+            }
+        }
+    </script>
+</head>
+<body class="light">
+    <img class="backbutt" src="/buttons/close.svg" hx-on:click="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
+    <div class="sidebar">
+        <ol>
+            <li class="option general" hx-on:click="highlight('.general')" data-highlighted="true">general</li>
+            <li class="option appearance" hx-on:click="highlight('.appearance')" data-highlighted="false">appearance</li>
+        </ol>
+    </div>
+    <div class="setting-body">
+        im here
+    </div>    
+</body>
+</html>

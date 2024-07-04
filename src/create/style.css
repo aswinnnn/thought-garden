@@ -1,11 +1,10 @@
-@font-face {
+/* @font-face {
   font-family: "Lexend";
   src: url("./Lexend-Variable.ttf") format("truetype-variations");
   font-weight: 350;
-}
+} */
 
-:root {
-  /* this has to be set to switch between light or dark */
+/* :root {
   color-scheme: light dark;
 
   --light-bg: #F7D8E2;
@@ -17,17 +16,15 @@
   --dark-article-bg: #696470;
   --dark-text: #111;
   --dark-text-title: ghostwhite;
-}
+} */
 
-.light {
-  /* forces light color-scheme */
+/* .light {
   color-scheme: light;
 }
 
 .dark {
-  /* forces dark color-scheme */
   color-scheme: dark;
-}
+} */
 
 body {
   padding: 1rem;
@@ -77,7 +74,18 @@ body {
   border: 5px 5px 5px black;
   height: max-content;
 }
+.article:hover {
+  box-shadow: 1px 1px 6px 0px inset;
+}
 
+.article:active {
+  box-shadow: 1px 1px 8px 0px inset;
+}
+
+
+.article:focus {
+  box-shadow: 1px 1px 6px 0px inset;
+}
 .article-title {
   font-family: 'Times New Roman', Times, serif;
   font-size: 2.6vw;
@@ -284,7 +292,7 @@ h4 {
   display: none;
   width: 25vw;
   height: 100vh;
-  background-color: #F7D8E2;
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
   padding-top: 8vh;
   color:saddlebrown;
   margin: auto;

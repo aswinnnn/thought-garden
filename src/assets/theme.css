@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Lexend";
+  src: url("/assets/LexendDeca-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 350;
+}
+
+:root {
+  /* this has to be set to switch between light or dark */
+  color-scheme: light dark;
+
+  --light-bg: bisque;
+  --light-article-bg: rgb(253, 238, 215);
+  --light-text: black;
+  --light-text-title: #333;
+
+  --dark-bg: #000;
+  --dark-article-bg: #696470;
+  --dark-text: #111;
+  --dark-text-title: ghostwhite;
+  color: #000;
+}
+
+.light {
+  /* forces light color-scheme */
+  color-scheme: light;
+}
+
+.dark {
+  /* forces dark color-scheme */
+  color-scheme: dark;
+}
