@@ -1,5 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use std::process::exit;
 use std::thread::{self, spawn};
 use tauri::api::dialog::FileDialogBuilder;
 use tauri::{scope::ipc::RemoteDomainAccessScope, Manager};
@@ -119,6 +120,22 @@ async fn createconfig(app: tauri::AppHandle) {
     }
 }
 
+#[tauri::command]
+async fn fill_post(postId: String) {
+    let uuid = uuid::Uuid::parse_str(&postId).expect("uuid parsing failed");
+
+    let j = match Journal::init(uuid.into_bytes().to_vec()) {
+    Ok(o) => o,
+    Err(e) => {eprintln!("[FILL-POST] {e}"); exit(1);},
+    };
+
+    // redirect to create
+    // change wallpaper, font
+    // fill date, title, and content
+    // make it look nicer
+
+
+}
 #[tauri::command]
 async fn importconfig() {}
 
