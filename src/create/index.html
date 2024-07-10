@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="create/style.css">
   <script src="../assets/htmx.min.js"></script>
   <script>
+  </script>
+  <script>
     function csshome() {
       const boxes = document.querySelectorAll('.post-bg');
       boxes.forEach(box => {
@@ -37,6 +39,7 @@
         style.appendChild(document.createTextNode(cssp));
         document.head.appendChild(style);
       });
+
     };
 
     function changecontent() {
@@ -86,6 +89,23 @@
       }
     }
 
+
+
+    function display(s) {
+
+      let d = document.querySelector(s);
+      if (d.getAttribute('data-seen') == "true") {
+        d.setAttribute('style', 'display: none')
+        d.setAttribute('data-seen', 'false')
+      }
+      else {
+        d.setAttribute('style', 'display: unset')
+        d.setAttribute('data-seen', 'true')
+      }
+    }
+  </script>
+
+  <script>
     function debounceUpdateBuffer() {
       let timeout;
       const articleContent = document.querySelector('.article-content');
@@ -97,28 +117,13 @@
         }, 2000);
       });
     }
-
-    document.addEventListener('DOMContentLoaded', debounceUpdateBuffer);
-
-    function display(s) {
-    
-      let d = document.querySelector(s);
-      if (d.getAttribute('data-seen')=="true") {
-        d.setAttribute('style', 'display: none')
-        d.setAttribute('data-seen', 'false')
-      }
-      else {
-        d.setAttribute('style', 'display: unset')
-        d.setAttribute('data-seen', 'true')
-      }
-    }
-
   </script>
 </head>
-<img class="menu-button" src="/buttons/menu.svg" hx-get="/api/create/sidenav" 
-hx-trigger="click" hx-target=".sidenav" hx-on:click="display('.sidenav')">
+<img class="menu-button" src="/buttons/menu.svg" hx-get="/api/create/sidenav" hx-trigger="click" hx-target=".sidenav"
+  hx-on:click="display('.sidenav')">
 <div class="sidenav" data-seen="false">
 </div>
+
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
@@ -134,7 +139,7 @@ hx-trigger="click" hx-target=".sidenav" hx-on:click="display('.sidenav')">
   </div>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
   <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create"
-    hx-trigger="load">
+    hx-trigger="load" hx-on:htmx:afterSwap="mason()">
     <br style="opacity: 0;">
     <article class="article">
       <h4 class="date">Friday, May 3, 2024</h4>

@@ -3234,6 +3234,7 @@ dependencies = [
  "chrono",
  "dirs",
  "once_cell",
+ "rand 0.8.5",
  "rusqlite",
  "time",
  "tokio",
