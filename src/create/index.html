@@ -138,6 +138,11 @@
     <div class="switch__indicator" />
   </div>
   </div>
+  <script>
+    document.querySelector('#one').addEventListener('click', function () {
+      document.querySelector('body').removeAttribute('style');
+    })
+  </script>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
   <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create"
     hx-trigger="load" hx-on:htmx:afterSwap="mason()">

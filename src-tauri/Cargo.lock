@@ -731,6 +731,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ef6b89e5b37196644d8796de5268852ff179b44e96276cf4290264843743bb7"
 
 [[package]]
+name = "emojis"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f619a926616ae7149a0d82610b051134a0d6c4ae2962d990c06c847a445c5d9"
+dependencies = [
+ "phf 0.11.2",
+]
+
+[[package]]
 name = "encoding_rs"
 version = "0.8.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3233,13 +3242,14 @@ dependencies = [
  "axum",
  "chrono",
  "dirs",
+ "emojis",
  "once_cell",
  "rand 0.8.5",
  "rusqlite",
  "serde",
+ "serde_json",
  "time",
  "tokio",
- "toml_edit 0.22.14",
  "tower-http",
  "uuid",
 ]

@@ -126,7 +126,7 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
     let uuid = uuid::Uuid::parse_str(&postId).expect("uuid parsing failed");
 
     let j = match Journal::init(uuid.into_bytes().to_vec()) {
-        Ok(o) => o,
+        Ok(o) => {println!("\x1b[92m{:#?}\x1b[0m", o);o},
         Err(e) => {
             eprintln!("[TG-BACKEND](FILL-POST) {e}");
             exit(1);
