@@ -18,7 +18,7 @@ async function loadlisteners() {
 
 
         await window.__TAURI__.event.listen('change_style', (event) => {
-            document.querySelector('#body').setAttribute('style', 'background-image: url(\'' + event.payload + '\')')
+            document.querySelector('#body').setAttribute('style', 'background-image: url(\'' + event.payload + '\')');
         })
 
         // input date through metadata
