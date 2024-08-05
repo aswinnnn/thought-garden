@@ -1,54 +1,53 @@
 @font-face {
     font-family: "Lexend Deca";
     src: url("/assets/LexendDeca-VariableFont_wght.ttf") format("truetype");
-  }
-  
-  :root {
+}
+
+:root {
     height: 100vh;
     width: 100vw;
-  
+
     font-family: "Lexend Deca", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-  
+
     color: #4d3537;
     background-color: #fceff1;
-  
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-  }
-  
-  #logo {
+}
+
+#logo {
     display: flex;
     margin-left: auto;
     margin-right: auto;
     height: 30vh;
     width: 20vw;
     padding: 1rem;
-  }
-  
-  #welcome {
+}
+
+#welcome {
     line-height: 2.5rem;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     padding: 2rem;
     font-family: "Lexend Deca", Arial, Helvetica, sans-serif;
     font-weight: 380;
     list-style-image: url("/assets/birdflower.svg");
     list-style-position: inside;
-  }
-  
-  #butt {
+}
+
+#butt {
     padding-left: 4.5rem;
     padding-bottom: 1rem;
-  }
-  
-  
-  input,
-  button {
+}
+
+input,
+button {
     border-radius: 3px;
     border: 1px solid transparent;
     font-size: 1rem;
@@ -58,46 +57,45 @@
     color: #0f0f0f;
     transition: border-color 0.25s;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.425);
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #b27a7a;
     color: #ffffff;
-  }
-  
-  button {
+}
+
+button {
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     border-color: #396cd8;
-  }
-  button:active {
+}
+button:active {
     border-color: #396cd8;
     background-color: #e8e8e8;
-  }
-  
-  input,
-  button {
-    outline: none;
-  }
+}
 
-  @media (max-width: 747px) {
+input,
+button {
+    outline: none;
+}
+
+@media (max-width: 747px) {
     #welcome {
-      line-height: 2.5rem;
-      font-size: 1.4rem;
-      transition: all 1s;
-      padding: 1.5rem;
-      list-style-image: url("/assets/birdflower.svg");
+        line-height: 2.5rem;
+        font-size: 1.4rem;
+        transition: all 1s;
+        padding: 1.5rem;
+        list-style-image: url("/assets/birdflower.svg");
     }
 
     #logo {
-      height: 30vh;
-      width: 30vw;
-      padding: 1rem;
+        height: 30vh;
+        width: 30vw;
+        padding: 1rem;
     }
-  }
-  
-  @media (prefers-color-scheme: dark) {
-  }
-  
+}
+
+@media (prefers-color-scheme: dark) {
+}
