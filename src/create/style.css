@@ -32,6 +32,8 @@ body {
     margin: 0;
     display: flex;
     background-color: light-dark(var(--light-bg), var(--dark-bg));
+    background-position: center;
+    background-attachment: scroll;
 }
 
 .main-content[data-content="home"] {
@@ -70,10 +72,13 @@ body {
     margin-bottom: 2rem;
     /* margin-left: -0.5vw; */
     margin-left: -1vh;
-    background-color: light-dark(
+    /* background-color: light-dark(
         var(--light-article-bg),
         var(--dark-article-bg)
-    );
+    ); */
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     border-radius: 0.3rem;
     padding: 1.5rem;
     border: 5px 5px 5px black;
@@ -118,7 +123,9 @@ body {
 }
 
 .top-right-button {
-    background-color: inherit;
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
     position: absolute;
     top: 0.2rem;
     right: 0.2rem;
@@ -228,10 +235,17 @@ body {
     /* background-position: 4rem; */
     background-size: contain;
     text-shadow: rgb(0, 0, 0) 1px 1px 1px;
+    max-height: fit-content;
 }
 
 .post-bg p {
     font-size: 1.2rem;
+}
+
+.post-bg .post-menu {
+    margin-left: 96%;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
 }
 
 /* .post-bg:hover {
@@ -294,7 +308,10 @@ h4 {
     display: none;
     width: 25vw;
     height: 100vh;
-    background-color: light-dark(var(--light-bg), var(--dark-bg));
+    /* background-color: light-dark(var(--light-bg), var(--dark-bg)); */
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
     padding-top: 8vh;
     color: saddlebrown;
     transition: all 1s;
