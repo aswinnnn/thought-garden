@@ -1,3 +1,3 @@
-## under construction
+## Pre-alpha test release
 
-Almost 90% complete. consumer release TBA.
+!! This is a test release to setup Github Actions and workflows and what not. It is not even close to being done yet lol.
