@@ -1,0 +1,3 @@
+[submodule "src-tauri/tg-backend"]
+	path = src-tauri/tg-backend
+	url = https://github.com/aswinnnn/thought-garden.git
