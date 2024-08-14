@@ -30,7 +30,7 @@ async fn start_backend(app: tauri::AppHandle) -> Result<(), ()> {
     //     win.emit("redirect", "intro")
     //         .expect("failed to redirect to /intro");
     // }
-    if let Some(rsc) = app.path_resolver().resolve_resource("/src/") {
+    if let Some(rsc) = app.path_resolver().resolve_resource("../src/") {
         tg_backend::start(rsc).await;
     }
 
