@@ -30,7 +30,9 @@ async fn start_backend(app: tauri::AppHandle) -> Result<(), ()> {
     //     win.emit("redirect", "intro")
     //         .expect("failed to redirect to /intro");
     // }
-    tg_backend::start().await;
+    if let Some(rsc) = app.path_resolver().resolve_resource("/src/") {
+        tg_backend::start(rsc).await;
+    }
 
     Ok(())
 }
@@ -126,7 +128,10 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
     let uuid = uuid::Uuid::parse_str(&postId).expect("uuid parsing failed");
 
     let j = match Journal::init(uuid.into_bytes().to_vec()) {
-        Ok(o) => {println!("\x1b[92m{:#?}\x1b[0m", o);o},
+        Ok(o) => {
+            println!("\x1b[92m{:#?}\x1b[0m", o);
+            o
+        }
         Err(e) => {
             eprintln!("[TG-BACKEND](FILL-POST) {e}");
             exit(1);
@@ -136,34 +141,45 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
     if let Some(main_win) = app.get_window("main") {
         // go to create page
         // activate the listener for fill_post
-        match main_win.eval(&format!("document.querySelector('#two').click();loadlisteners();")) {
-            Ok(_) => {println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m clicked create, activated listener")},
+        match main_win.eval(&format!(
+            "document.querySelector('#two').click();loadlisteners();"
+        )) {
+            Ok(_) => {
+                println!(
+                    "\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m clicked create, activated listener"
+                )
+            }
             Err(e) => {
                 eprintln!("\x1b[31m[TG-BACKEND](FILL-POST)\x1b[0m {e}")
-            },
+            }
         }
-        
+
         println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m redirected to create")
     }
 
     tokio::time::sleep(Duration::from_millis(300)).await;
 
     match app.emit_to("main", "fill_post", j) {
-    Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post)\x1b[0m{e}"),
-    Ok(_) => {println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m successfully emited 'fill_post'")},
+        Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post)\x1b[0m{e}"),
+        Ok(_) => {
+            println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m successfully emited 'fill_post'")
+        }
     }
-    let wallp = match Media::get(uuid.as_bytes().to_vec(), tg_backend::journal::MediaType::Wallpaper(String::new())) {
-    tg_backend::journal::MediaType::Wallpaper(w) => w,
-    _ => "unreachable".into()
+    let wallp = match Media::get(
+        uuid.as_bytes().to_vec(),
+        tg_backend::journal::MediaType::Wallpaper(String::new()),
+    ) {
+        tg_backend::journal::MediaType::Wallpaper(w) => w,
+        _ => "unreachable".into(),
     };
 
     println!("wallpaper: {wallp}");
-        
-    
 
     match app.emit_to("main", "change_style", wallp) {
-    Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post)\x1b[0m{e}"),
-    Ok(_) => {println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m successfully emited 'change_style'")},
+        Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post)\x1b[0m{e}"),
+        Ok(_) => {
+            println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m successfully emited 'change_style'")
+        }
     }
 
     // redirect to create
