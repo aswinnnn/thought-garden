@@ -246,10 +246,15 @@ body {
 }
 
 .post-bg .post-menu {
+    width: fit-content;
     margin-left: 96%;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    box-shadow: 1px 1px 1px 1px #2c2929;
 }
+
+.post-bg .post-menu:hover {
+    box-shadow: 1px 1px 1px 1px #2c2929 inset;
+}
+
 
 /* .post-bg:hover {
   background-image: linear-gradient(to bottom,
