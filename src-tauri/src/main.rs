@@ -146,7 +146,7 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
         )) {
             Ok(_) => {
                 println!(
-                    "\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m clicked create, activated listener"
+                    "\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m opened create tab, activated listener"
                 )
             }
             Err(e) => {

@@ -8,12 +8,16 @@ async function loadlisteners() {
             let title = document.querySelector('.article-title');
             let content = document.querySelector('.article-content');
             let date = document.querySelector('.date');
+            let article = document.querySelector('.article');
+
 
             console.log(event.payload)
 
             title.innerHTML = event.payload.buffer_title;
             content.innerText = event.payload.buffer;
             date.innerText = event.payload.metadata.created_at;
+            console.log(article)
+            article.setAttribute('data-id', event.payload.uuid_str);
         })
 
 
