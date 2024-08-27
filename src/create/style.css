@@ -241,6 +241,9 @@ body {
     background-size: contain;
     text-shadow: rgb(0, 0, 0) 1px 1px 1px;
     max-height: fit-content;
+    height: fit-content;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 
 .post-bg p {
@@ -331,7 +334,8 @@ h4 {
 .option {
     display: inline-grid;
     grid-auto-flow: column;
-    font-size: 3vw;
+    /* font-size: 3vw; */
+    font-size: calc(3vw + (5vw - 3vw) * ((100vw - 75vw) / (100 - 75))); 
     cursor: pointer;
     transition: all 1s;
 }
@@ -371,7 +375,8 @@ h4 {
     }
 
     .option {
-        font-size: 4vw;
+        /* font-size: 4vw; */
+        font-size: calc(3vw + (5vw - 3vw) * ((767px - 644px) / (767px - 644px))); 
     }
 }
 
