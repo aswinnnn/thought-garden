@@ -144,7 +144,7 @@
     })
   </script>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content" data-content="home" hx-on::after-settle="changecontent();csshome()" hx-get="/api/create"
+  <main class="main-content" data-content="home" hx-on::after-swap="changecontent();csshome()" hx-get="/api/create"
     hx-trigger="load" hx-on:htmx:afterSwap="mason()">
     <br style="opacity: 0;">
     <article class="article">
