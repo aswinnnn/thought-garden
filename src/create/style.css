@@ -238,11 +238,11 @@ body {
     padding: 1rem;
     border-radius: 6px;
     /* background-position: 4rem; */
-    background-size: contain;
+    background-size: cover;
     text-shadow: rgb(0, 0, 0) 1px 1px 1px;
     max-height: fit-content;
     height: fit-content;
-    background-position: center top;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
