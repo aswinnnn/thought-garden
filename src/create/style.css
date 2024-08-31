@@ -32,7 +32,7 @@ body {
     margin: 0;
     display: flex;
     background-color: light-dark(var(--light-bg), var(--dark-bg));
-    background-position: top center;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
