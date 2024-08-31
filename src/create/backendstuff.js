@@ -38,11 +38,3 @@ async function loadlisteners() {
 // emit('click', {
 //   theMessage: 'Tauri is awesome!',
 // })
-
-async function fill_post(postId) {
-    try {
-        await window.__TAURI__.invoke('fill_post', { postId: postId });
-    } catch (error) {
-        console.error('Error invoking Tauri fill_post[home.rs:46]:', error);
-    }
-}

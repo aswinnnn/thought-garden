@@ -252,14 +252,13 @@ body {
 .post-bg p {
     font-size: 1.2rem;
 }
-
-.post-menu {
+.post-menu-outer {
     width: fit-content;
     margin-left: 96%;
     box-shadow: 1px 1px 1px 1px #2c2929;
 }
 
-.post-menu:hover {
+.post-menu-outer:hover {
     box-shadow: 1px 1px 1px 1px #2c2929 inset;
 }
 
