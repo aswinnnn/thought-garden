@@ -13,11 +13,17 @@
   --light-text: black;
   --light-text-title: #333;
 
-  --dark-bg: #000;
+  --dark-bg: rgb(90, 71, 55);
   --dark-article-bg: #696470;
-  --dark-text: #111;
+  --dark-text: #ffffff;
   --dark-text-title: ghostwhite;
+  
   color: #000;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 .light {

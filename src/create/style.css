@@ -80,20 +80,20 @@ body {
     background-color: transparent;
     border-radius: 0.3rem;
     padding: 1.5rem;
-    border: 5px 5px 5px black;
+    border: 5px 5px 5px light-dark(var(black), var(white));
     height: max-content;
 }
 
 .article:hover {
-    box-shadow: 0px 0px 6px 0px inset;
+    box-shadow: 0px 0px 6px 0px inset light-dark(var(--light-text), var(--dark-text));
 }
 
 .article:active {
-    box-shadow: 1px 1px 8px 0px inset;
+    box-shadow: 1px 1px 8px 0px inset light-dark(var(--light-text), var(--dark-text));
 }
 
 .article:focus {
-    box-shadow: 1px 1px 6px 0px inset;
+    box-shadow: 1px 1px 6px 0px inset light-dark(var(--light-text), var(--dark-text));
 }
 
 .article-title {
@@ -109,9 +109,9 @@ body {
     font-size: 1.2rem;
     font-weight: 70;
     line-height: 1rem;
-    color: #333;
+    color: light-dark(var(--light-text), var(--dark-text));
     margin-left: 0.12rem;
-    box-shadow: 1px 1px black;
+    box-shadow: 1px 1px light-dark(var(--light-text), var(--dark-text));
     mix-blend-mode: hard-light;
 }
 
@@ -123,8 +123,8 @@ body {
 }
 
 .article-content:hover:not(:empty) {
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: contrast(50%);
+    backdrop-filter: contrast(50%);
 }
 
 .top-right-button {
@@ -189,13 +189,13 @@ body {
 }
 
 .switch__label:hover {
-    text-shadow: rgb(0, 0, 0) 2px 2px 2px;
-    color: rgb(0, 0, 0);
+    text-shadow: light-dark(var(--light-text), var(--dark-text)) 2px 2px 2px;
+    color: light-dark(var(--light-text), var(--dark-text));
 }
 
 .switch__indicator {
     z-index: 1;
-    box-shadow: 1px 1px 1px 1px #000000;
+    box-shadow: 1px 1px 1px 1px light-dark(var(--light-text), var(--dark-text));
     opacity: 0.2;
     width: 3.5rem;
     height: 5rem;
@@ -289,6 +289,7 @@ h4 {
 /* ------------------- EDITOR ----------------------  */
 .hbar {
     opacity: 0;
+    background-color: light-dark(var(saddlebrown), var(rgb(245, 131, 105)))
 }
 
 [contenteditable="true"]:empty:not(:focus):before {
@@ -322,6 +323,7 @@ h4 {
     z-index: 1;
     height: fit-content;
     cursor: pointer;
+    color: light-dark(var(--light-text),var(--dark-text));
 }
 
 .sidenav {
@@ -330,10 +332,10 @@ h4 {
     height: 100vh;
     /* background-color: light-dark(var(--light-bg), var(--dark-bg)); */
     background-color: transparent;
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
     padding-top: 8vh;
-    color: saddlebrown;
+    color: light-dark(rgb(133, 74, 32), rgb(255, 199, 159));
     transition: all 1s;
     margin-bottom: 80vh;
     transition: all 1s;
@@ -347,6 +349,7 @@ h4 {
     font-size: 1.4rem;
     cursor: pointer;
     transition: all 1s;
+    margin-right: -1.5rem;
 }
 
 /* ------------ RESPONSIVE BULLSHIT ------------------- */
