@@ -120,10 +120,15 @@
   </script>
   <script src="/create/backendstuff.js"></script>
 </head>
-<img class="menu-button" src="/buttons/menu.svg" hx-get="/api/create/sidenav" hx-trigger="click" hx-target=".sidenav"
-  hx-on:click="display('.sidenav')">
-<div class="sidenav" data-seen="false">
-</div>
+<span class="sidepanel">
+  <svg class="menu-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"
+    src="/buttons/menu.svg" hx-get="/api/create/sidenav" hx-trigger="click" hx-target=".sidenav"
+    hx-on:click="display('.sidenav')">
+    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+  </svg>
+  <div class="sidenav" data-seen="false">
+  </div>
+</span>
 
 <body class="light" id="body">
   <div class="switch">

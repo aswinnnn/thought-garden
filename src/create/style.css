@@ -319,10 +319,19 @@ h4 {
 
 /* ------------- SIDENAV ------------------------------ */
 
+.sidepanel {
+    display: flex;
+    flex-direction: row;
+}
+
 .menu-button {
-    z-index: 1;
-    height: fit-content;
+    z-index: 9;
+    height: 25px;
+    width: 24px;
     cursor: pointer;
+}
+
+.menu-button path {
     color: light-dark(var(--light-text),var(--dark-text));
 }
 
@@ -339,6 +348,7 @@ h4 {
     transition: all 1s;
     margin-bottom: 80vh;
     transition: all 1s;
+    margin-left: -1.5rem;
 }
 
 
