@@ -80,20 +80,20 @@ body {
     background-color: transparent;
     border-radius: 0.3rem;
     padding: 1.5rem;
-    border: 5px 5px 5px light-dark(var(black), var(white));
+    border: 5px 5px 5px light-dark(var(rgb(31, 25, 25)), var(rgb(255, 229, 229)));
     height: max-content;
 }
 
 .article:hover {
-    box-shadow: 0px 0px 6px 0px inset light-dark(var(--light-text), var(--dark-text));
+    box-shadow: light-dark(#2b2424, var(--dark-text)) 0px 0px 6px 0px inset;
 }
 
 .article:active {
-    box-shadow: 1px 1px 8px 0px inset light-dark(var(--light-text), var(--dark-text));
+    box-shadow: light-dark(#271f1d, var(--dark-text)) 1px 1px 8px 0px inset;
 }
 
 .article:focus {
-    box-shadow: 1px 1px 6px 0px inset light-dark(var(--light-text), var(--dark-text));
+    box-shadow: light-dark(#392929, var(--dark-text)) 1px 1px 6px 0px inset;
 }
 
 .article-title {
@@ -341,11 +341,12 @@ h4 {
     height: 100vh;
     /* background-color: light-dark(var(--light-bg), var(--dark-bg)); */
     background-color: transparent;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    /* -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); */
+    border: 5px 5px 5px light-dark(var(black), var(white));
     padding-top: 8vh;
     color: light-dark(rgb(133, 74, 32), rgb(255, 199, 159));
-    transition: all 1s;
+    transition: all 300ms;
     margin-bottom: 80vh;
     transition: all 1s;
     margin-left: -1.5rem;
@@ -360,6 +361,10 @@ h4 {
     cursor: pointer;
     transition: all 1s;
     margin-right: -1.5rem;
+}
+
+.option svg path {
+    color: light-dark(var(--light-text),var(--dark-text))
 }
 
 /* ------------ RESPONSIVE BULLSHIT ------------------- */
