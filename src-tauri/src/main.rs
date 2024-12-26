@@ -129,7 +129,7 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
 
     let j = match Journal::init(uuid.into_bytes().to_vec()) {
         Ok(o) => {
-            println!("\x1b[92m{:#?}\x1b[0m", o);
+            println!("---------------------------\n\x1b[92m{:#?}\x1b[0m-----------------------------------------\n", o);
             o
         }
         Err(e) => {
@@ -176,9 +176,9 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
     println!("wallpaper: {wallp}");
 
     match app.emit_to("main", "change_style", wallp) {
-        Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post)\x1b[0m{e}"),
+        Err(e) => eprintln!("\x1b[31m[TG-BACKEND] (fill-post => change_style )\x1b[0m{e}"),
         Ok(_) => {
-            println!("\x1b[32m[TG-BACKEND](FILL-POST)\x1b[0m successfully emited 'change_style'")
+            println!("\x1b[32m[TG-BACKEND](FILL-POST => change_style)\x1b[0m successfully emited 'change_style'")
         }
     }
 

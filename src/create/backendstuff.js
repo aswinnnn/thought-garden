@@ -21,15 +21,15 @@ async function loadlisteners() {
             console.log(article)
             article.setAttribute('data-id', event.payload.uuid_str);
 
-
-            await window.__TAURI__.event.listen('change_style', (event) => {
-                document.querySelector('#body').setAttribute('style', 'background-image: url(\''+ event.payload +'\');background-position: center;');
-            })
-
             // input date through metadata
             // perfomance issues
 
             console.log('listeners active')
+        })
+
+        await window.__TAURI__.event.listen('change_style', (event) => {
+            document.querySelector('body').setAttribute('style', 'background-image: url(\'' + event.payload + '\');background-position: center;');
+            console.log("changed wallpaper to: " + event.payload);
         })
     } catch (error) {
         console.error("[fill_post_listener] ", error)
