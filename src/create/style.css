@@ -122,9 +122,11 @@ body {
     color: light-dark(var(--light-text), var(--dark-text));
 }
 
-.article-content:hover:not(:empty) {
-    -webkit-backdrop-filter: contrast(50%);
-    backdrop-filter: contrast(50%);
+.article:hover:not(:empty) {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    /* text-shadow: 0px 0px 1px light-dark(black,rgb(255, 255, 255)), 0 0 0.2em light-dark(black,rgb(170, 170, 221)), 0 0 0.1em light-dark(black,rgb(190, 190, 255)); */
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .top-right-button {
@@ -212,12 +214,12 @@ body {
     transform: translate3d(1rem, 0, 0);
 }
 
-.switch input#one:checked ~ .switch__indicator {
+.switch input#one:checked~.switch__indicator {
     background: #d9caa6;
     transform: translate3d(0.9rem, 0, 0);
 }
 
-.switch input#two:checked ~ .switch__indicator {
+.switch input#two:checked~.switch__indicator {
     background: #a6b5d9;
     transform: translate3d(5.5rem, 0, 0);
 }
@@ -332,7 +334,7 @@ h4 {
 }
 
 .menu-button path {
-    color: light-dark(var(--light-text),var(--dark-text));
+    color: light-dark(var(--light-text), var(--dark-text));
 }
 
 .sidenav {
@@ -364,7 +366,7 @@ h4 {
 }
 
 .option svg path {
-    color: light-dark(var(--light-text),var(--dark-text))
+    color: light-dark(var(--light-text), var(--dark-text))
 }
 
 /* ------------ RESPONSIVE BULLSHIT ------------------- */
@@ -450,7 +452,7 @@ h4 {
         font-size: 2.2vw;
     }
 
-    
+
     .option {
         font-size: 1.12rem;
     }
@@ -475,11 +477,12 @@ h4 {
         font-size: 4vw;
     }
 
-    
+
     .option {
         font-size: 1rem;
     }
 }
+
 /* @media screen and (max-width: 1120px) {
   h4 {
     font-size: 8vh;
