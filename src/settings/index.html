@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,7 @@
             s = document.querySelector(s)
             let str = s.getAttribute('data-highlighted');
             if (str) {
-                if (str=="true") {
+                if (str == "true") {
                     s.setAttribute('data-highlighted', 'false')
                 }
                 else {
@@ -26,16 +27,26 @@
         }
     </script>
 </head>
+
 <body class="light">
-    <img class="backbutt" src="/buttons/close.svg" hx-on:click="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
-    <div class="sidebar">
-        <ol>
-            <li class="option general" hx-on:click="highlight('.general')" data-highlighted="true">general</li>
-            <li class="option appearance" hx-on:click="highlight('.appearance')" data-highlighted="false">appearance</li>
-        </ol>
-    </div>
+    <span class="sidepanel">
+
+        <svg class="backbutt" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"
+            hx-on:click="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
+            <path
+                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+        <div class="sidebar">
+            <ol>
+                <li class="option general" hx-on:click="highlight('.general')" data-highlighted="true">general</li>
+                <li class="option appearance" hx-on:click="highlight('.appearance')" data-highlighted="false">appearance
+                </li>
+            </ol>
+        </div>
+    </span>
     <div class="setting-body">
-       here
-    </div>    
+        here
+    </div>
 </body>
+
 </html>

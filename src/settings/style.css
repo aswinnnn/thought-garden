@@ -6,31 +6,39 @@ body {
     background-color: light-dark(var(--light-bg), var(--dark-bg));
 }
 
+.sidepanel {
+    display: flex;
+    flex-direction: row;
+}
+
 .backbutt {
     z-index: 1;
-    box-shadow: 1px 1px 1px 1px;
+    box-shadow: black 0px 0px 2px inset;
+    border-radius: 0.5rem;
+    transition: all 299ms;
 }
 
 .backbutt:hover {
-    box-shadow: 1px 1px 3px 1px;
+    box-shadow: black 0px 0px 4px inset;
+    border-radius: 0.8rem;
 }
 
 .backbutt:active {
-    box-shadow: 1px 1px 2px 1px inset;
+    box-shadow: 1px 1px 3px 1px inset;
+    border-radius: 1rem;
 }
 
 .sidebar {
     padding: 1.3vw;
     margin-top: 1vh;
-    margin-left: -7.5vh;
+    margin-left: -9vh;
     width: 20vw;
     min-width: fit-content;
     height: 100vh;
     background-color: light-dark(var(--light-bg), var(--dark-bg));
     color: light-dark(var(--light-text-title), var(--dark-text-title));
-    font-size: larger;
     font-family: 'Lexend', 'Times New Roman', Times, serif;
-    font-size: 3vh;
+    font-size: 2.5vh;
     transition: all 1s;
 }
 
@@ -59,6 +67,7 @@ body {
     background-color: rgb(236, 192, 156);
     text-indent: 5%;
     font-weight: 540;
+    padding-right: 20px;
 }
 
 @media screen and (max-height: 777px) {
