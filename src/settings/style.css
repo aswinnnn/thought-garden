@@ -97,7 +97,7 @@ body {
 
 .setting-body .option textarea:focus {
     box-shadow: black 0px 0px 3px inset;
-    background: linear-gradient(90deg, #2d2a2a2a, rgba(174, 247, 255, 0.373));
+    background: linear-gradient(90deg, #dad0d02a, rgba(174, 247, 255, 0.373));
 }
 
 .setting-body .option {
