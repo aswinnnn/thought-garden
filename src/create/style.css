@@ -140,11 +140,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.5rem;
-    text-shadow: rgb(0, 0, 0) 1px 1px 1px;
+    text-shadow: light-dark(rgb(0, 0, 0),#fff) 0px 0px 1px;
 }
 
 .top-right-button:hover {
-    text-shadow: rgb(0, 0, 0) 2px 2px 2px;
+    text-shadow: light-dark(rgb(0, 0, 0),#fff) 0px 0px 2px;
 }
 
 /* ----------------- MENU --------------------- */
@@ -191,12 +191,13 @@ body {
 }
 
 .switch__label:hover {
-    text-shadow: light-dark(var(--light-text), var(--dark-text)) 2px 2px 2px;
+    text-shadow: light-dark(var(--light-text), var(--dark-text)) 0px 0px 2px;
     color: light-dark(var(--light-text), var(--dark-text));
 }
 
 .switch__indicator {
-    z-index: 1;
+    z-index: -1;
+    pointer-events: hover;
     box-shadow: 1px 1px 1px 1px light-dark(var(--light-text), var(--dark-text));
     opacity: 0.2;
     width: 3.5rem;
@@ -205,13 +206,17 @@ body {
     padding-left: 0.5rem;
     position: absolute;
     top: -1rem;
-    left: 0;
-    background: blue;
+    left: 0.3rem;
+    background: rgba(172, 172, 234, 0.516);
     border-radius: 20%;
     transition:
         transform 600ms cubic-bezier(0.02, 0.94, 0.09, 0.97),
         background 300ms cubic-bezier(0.17, 0.67, 0.14, 1.03);
     transform: translate3d(1rem, 0, 0);
+}
+
+.switch__indicator:hover {
+    border-radius: 25%;
 }
 
 .switch input#one:checked~.switch__indicator {

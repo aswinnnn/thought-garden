@@ -38,7 +38,7 @@ body {
     background-color: light-dark(var(--light-bg), var(--dark-bg));
     color: light-dark(var(--light-text-title), var(--dark-text-title));
     font-family: 'Lexend', 'Times New Roman', Times, serif;
-    font-size: 2.5vh;
+    font-size: 1.3rem;
     transition: all 1s;
 }
 
@@ -72,11 +72,15 @@ body {
 
 @media screen and (max-height: 777px) {
     .setting-body {
-        font-size: 6vh;
+        font-size: 1.3rem;
     }
 
     .sidebar {
-        font-size: 4vh;
+        font-size: 1.3rem;
         width: fit-content;
+    }
+
+    .sidebar ol {
+        padding-left: 1rem;
     }
 }
