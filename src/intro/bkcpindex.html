@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/intro/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thought garden.</title>
+  <script type="module" src="/intro/index.js" defer></script>
+</head>
+
+<body>
+  <img id="logo" src="/assets/tg-logo.svg"></p>
+  <ol>
+    <li id="welcome">🏡 thought garden is a garden for your thoughts. </li>
+    <li id="welcome">🌻 it is a highly customizable journal where you can decorate your thoughts with songs, pictures and words.
+      <br>
+    </li>
+    <li id="welcome">🤎 all offline and open source.</li>
+  </ol>
+
+  <br>
+
+  <div id="butt">
+    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders"
+      onclick="window.__TAURI__.tauri.invoke('createconfig')">GET STARTED</button>
+  </div>
+  <div id="butt">
+    <button type="button" id="butt1" value="select a folder" title="click to select a folder" aria-label="open folders"
+      onclick="window.__TAURI__.tauri.invoke('importconfig')">IMPORT OLDER JOURNALS</button>
+  </div>
+</body>
+</htm
