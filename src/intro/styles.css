@@ -13,7 +13,7 @@
     font-weight: 400;
 
     color: #4d3537;
-    background-color: #fceff1;
+    background-color: #ffcfa8;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -70,11 +70,11 @@ button {
 }
 
 button:hover {
-    border-color: #396cd8;
+    border-color: #c8daff;
 }
 button:active {
-    border-color: #396cd8;
-    background-color: #e8e8e8;
+    border-color: #c9daff;
+    background-color: #f9a0a0;
 }
 
 input,

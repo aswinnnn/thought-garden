@@ -7,6 +7,7 @@
     <script src="/assets/htmx.min.js"></script>
     <link rel="stylesheet" href="/settings/style.css">
     <link rel="stylesheet" href="/assets/theme.css">
+    <script src="/settings/index.js"></script>
     <script>
         function highlight(s) {
             let options = document.querySelectorAll('.option');
@@ -25,6 +26,13 @@
                 }
             }
         }
+
+        function loadSettings() {
+            (async function () {
+                const set = await window.__TAURI__.tauri.invoke('settings_load');
+                document.querySelector('.setting-body').innerHTML = set;
+            })()
+        }
     </script>
 </head>
 
@@ -32,7 +40,7 @@
     <span class="sidepanel">
 
         <svg class="backbutt" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"
-            hx-on:click="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
+            onclick="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
             <path
                 d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
         </svg>
@@ -45,7 +53,7 @@
         </div>
     </span>
     <div class="setting-body">
-        here
+        <script>loadSettings();</script>
     </div>
 </body>
 

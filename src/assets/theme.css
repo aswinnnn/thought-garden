@@ -8,12 +8,12 @@
   /* this has to be set to switch between light or dark */
   color-scheme: light dark;
 
-  --light-bg: rgb(255, 207, 168);
+  --light-bg: #ffcfa8;
   --light-article-bg: bisque;
   --light-text: black;
   --light-text-title: #333;
 
-  --dark-bg: rgb(61, 49, 40);
+  --dark-bg: #3d3128;
   --dark-article-bg: #696470;
   --dark-text: #ffffff;
   --dark-text-title: ghostwhite;

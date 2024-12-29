@@ -30,8 +30,8 @@ body {
 
 .sidebar {
     padding: 1.3vw;
-    margin-top: 1vh;
-    margin-left: -9vh;
+    margin-top: 1rem;
+    margin-left: -4.5rem;
     width: 20vw;
     min-width: fit-content;
     height: 100vh;
@@ -52,12 +52,16 @@ body {
 }
 
 .setting-body {
+    display: flex;
+    flex-flow: column;
+    flex-direction: column;
+    row-gap: 1rem;
     padding: 3vw;
     width: 100vw;
     background-color: light-dark(var(--light-article-bg), var(--dark-article-bg));
     color: light-dark(var(--light-text-title), var(--dark-text-title));
-    font-size: 3vh;
     border-radius: 1rem;
+    font-size: 1.4rem;
     box-shadow: 0px 0px 6px 0px inset;
 }
 
@@ -70,14 +74,60 @@ body {
     padding-right: 20px;
 }
 
-@media screen and (max-height: 777px) {
+.setting-body .option textarea {
+    width: 4rem !important;
+    height: 1rem !important;
+    max-lines: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    color: #1e0707;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    resize: none;
+    outline: none;
+    transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.setting-body .option:hover textarea {
+    border-radius: 10px;
+}
+
+.setting-body .option textarea:focus {
+    box-shadow: black 0px 0px 3px inset;
+    background: linear-gradient(90deg, #2d2a2a2a, rgba(174, 247, 255, 0.373));
+}
+
+.setting-body .option {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    height: fit-content;
+    width: fit-content;
+    padding: 0.3rem;
+    transition: all 299ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.setting-body .option:hover {
+    border: #1e0707 dashed 1px;
+    border-radius: 0.5rem;
+}
+
+@media screen and (max-width: 720px) {
+
     .setting-body {
+        display: flex;
+        flex-flow: column;
+        flex-direction: column;
         font-size: 1.3rem;
     }
 
     .sidebar {
         font-size: 1.3rem;
         width: fit-content;
+        margin-left: -2.8rem;
     }
 
     .sidebar ol {

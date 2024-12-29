@@ -188,6 +188,47 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
     // make it look nicer
 }
 
+#[tauri::command]
+async fn settings_update(key: String, value: String) -> bool {
+    if let Ok(config) = tg_backend::config::json::read_config() {
+        println!("----config----\n{:#?}\n----config-end----", config);
+    }
+
+    true
+}
+
+#[tauri::command]
+async fn settings_load() -> String {
+    if let Ok(config) = tg_backend::config::json::read_config() {
+        let mut set = String::new();
+        for (key, value) in config {
+            match value {
+                serde_json::Value::Null => todo!(),
+                serde_json::Value::Bool(_) => todo!(),
+                serde_json::Value::Number(_) => todo!(),
+                serde_json::Value::String(v) => {
+                    set.push_str(
+                        format!(
+                            r#"<div class="option">
+                <label for="{key}">{key}</label>
+                <textarea id="{key}" name="{key}" maxlength="10">{v}</textarea>
+                 </div>"#
+                        )
+                        .to_string()
+                        .as_str(),
+                    );
+                }
+                serde_json::Value::Array(_) => todo!(),
+                serde_json::Value::Object(_) => todo!(),
+            }
+        }
+
+        set
+    } else {
+        r#"<div style="background-color=f62424">READ_CONFIG() returned an Error.</div>"#.into()
+    }
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
@@ -200,6 +241,8 @@ fn main() {
             redirect,
             call_js,
             fill_post,
+            settings_update,
+            settings_load
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

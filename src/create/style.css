@@ -340,6 +340,8 @@ h4 {
 
 .menu-button path {
     color: light-dark(var(--light-text), var(--dark-text));
+    height: 25px;
+    width: 24px;
 }
 
 .sidenav {
