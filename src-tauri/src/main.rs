@@ -1,5 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use std::collections::hash_map::Keys;
 use std::process::exit;
 use std::thread::{self, spawn};
 use std::time::Duration;
@@ -190,44 +191,57 @@ async fn fill_post(postId: String, app: tauri::AppHandle) {
 
 #[tauri::command]
 async fn settings_update(key: String, value: String) -> bool {
-    if let Ok(config) = tg_backend::config::json::read_config() {
+    if let Ok(mut config) = tg_backend::config::json::read_config() {
         println!("----config----\n{:#?}\n----config-end----", config);
+        tg_backend::config::json::modify_config(&key, &value, &mut config);
     }
 
     true
 }
 
-#[tauri::command]
-async fn settings_load() -> String {
-    if let Ok(config) = tg_backend::config::json::read_config() {
-        let mut set = String::new();
-        for (key, value) in config {
-            match value {
-                serde_json::Value::Null => todo!(),
-                serde_json::Value::Bool(_) => todo!(),
-                serde_json::Value::Number(_) => todo!(),
-                serde_json::Value::String(v) => {
-                    set.push_str(
-                        format!(
-                            r#"<div class="option">
-                <label for="{key}">{key}</label>
-                <textarea id="{key}" name="{key}" maxlength="10">{v}</textarea>
-                 </div>"#
-                        )
-                        .to_string()
-                        .as_str(),
-                    );
-                }
-                serde_json::Value::Array(_) => todo!(),
-                serde_json::Value::Object(_) => todo!(),
-            }
-        }
+// #[tauri::command]
+// async fn settings_load() -> String {
+//     if let Ok(config) = tg_backend::config::json::read_config() {
+//         let mut set = String::new();
+//         let mut titles = Vec::new();
 
-        set
-    } else {
-        r#"<div style="background-color=f62424">READ_CONFIG() returned an Error.</div>"#.into()
-    }
-}
+//         for (k, _) in &config {
+//             // get the heading for each setting
+//             for title in k.split('.') {
+//                 titles.push(title.to_string());break
+//             }
+//         }
+
+//         titles.dedup();
+
+//         for (key, value) in config {
+//             match value {
+//                 serde_json::Value::Null => todo!(),
+//                 serde_json::Value::Bool(_) => todo!(),
+//                 serde_json::Value::Number(_) => todo!(),
+//                 serde_json::Value::String(v) => {
+
+//                     set.push_str(
+//                         format!(
+//                             r#"<div class="option">
+//                 <label for="{key}">{key}</label>
+//                 <textarea id="{key}" name="{key}" maxlength="10">{v}</textarea>
+//                  </div>"#
+//                         )
+//                         .to_string()
+//                         .as_str(),
+//                     );
+//                 }
+//                 serde_json::Value::Array(_) => todo!(),
+//                 serde_json::Value::Object(_) => todo!(),
+//             }
+//         }
+
+//         set
+//     } else {
+//         r#"<div style="background-color=f62424">READ_CONFIG() returned an Error.</div>"#.into()
+//     }
+// }
 
 fn main() {
     tauri::Builder::default()
@@ -241,8 +255,7 @@ fn main() {
             redirect,
             call_js,
             fill_post,
-            settings_update,
-            settings_load
+            settings_update
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

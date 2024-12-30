@@ -10,7 +10,7 @@
     <script src="/settings/index.js"></script>
     <script>
         function highlight(s) {
-            let options = document.querySelectorAll('.option');
+            let options = document.querySelectorAll('.setting-option');
             for (opt of options) {
                 opt.setAttribute('data-highlighted', 'false');
             }
@@ -33,28 +33,68 @@
                 document.querySelector('.setting-body').innerHTML = set;
             })()
         }
+        function notice(msg) {
+            let n = document.createElement('div');
+            n.className = "notice";
+            n.textContent = msg;
+            let set = document.querySelector('.setting-body');
+            set.insertBefore(n, set.firstChild);
+            setTimeout(() => {
+                set.removeChild(n);
+            }, 2000)
+        }
     </script>
 </head>
 
 <body class="light">
     <span class="sidepanel">
 
-        <svg class="backbutt" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"
-            onclick="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
+        <svg class="backbutt" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+            fill="currentColor" onclick="window.__TAURI__.tauri.invoke('redirect', {to: 'create'})">
             <path
                 d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
         </svg>
         <div class="sidebar">
             <ol>
-                <li class="option general" hx-on:click="highlight('.general')" data-highlighted="true">general</li>
-                <li class="option appearance" hx-on:click="highlight('.appearance')" data-highlighted="false">appearance
+                <li class="setting-option general" onclick="highlight('.general')" data-highlighted="true"
+                    hx-get="/api/settings/general" hx-trigger="click" hx-target=".setting-body">general</li>
+                <li class="setting-option appearance" onclick="highlight('.appearance')" data-highlighted="false"
+                    hx-get="/api/settings/appearance" hx-trigger="click" hx-target=".setting-body">appearance
                 </li>
             </ol>
         </div>
     </span>
     <div class="setting-body">
-        <script>loadSettings();</script>
+        <script>document.querySelector('.appearance').dispatchEvent(new MouseEvent('click'));
+            let e = document.querySelector('.setting-body');
+            (async function () {
+                e.innerHTML = (await (await fetch('/api/settings/appearance')).text());
+            })().then(() => { loadlisteners() })
+        </script>
     </div>
+    <script>
+        function loadlisteners() {
+            console.log("activated listeners.");
+            let elms = document.querySelectorAll('.option textarea');
+            for (e of elms) {
+                let timeout;
+                e.addEventListener('input', function (el) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        (async function () {
+                            let r = await window.__TAURI__.tauri.invoke('settings_update', {
+                                key: el.srcElement.id,
+                                value: el.srcElement.value
+                            });
+                            if (r) {
+                                notice("changes saved.");
+                            }
+                        })()
+                    }, 1500);
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

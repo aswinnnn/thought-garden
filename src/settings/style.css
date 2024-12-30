@@ -6,6 +6,19 @@ body {
     background-color: light-dark(var(--light-bg), var(--dark-bg));
 }
 
+.notice {
+    background-color: rgb(255, 165, 48);
+    font-family: monospace;
+    font-weight: 540;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+	font-size: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: black 0px 0px 3px inset;
+}
+
 .sidepanel {
     display: flex;
     flex-direction: row;
