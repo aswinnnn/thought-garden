@@ -7,6 +7,7 @@
     <script src="/assets/htmx.min.js"></script>
     <link rel="stylesheet" href="/settings/style.css">
     <link rel="stylesheet" href="/assets/theme.css">
+    <script src="/src/load-settings.js"></script>
     <script src="/settings/index.js"></script>
     <script>
         function highlight(s) {
@@ -75,7 +76,7 @@
     <script>
         function loadlisteners() {
             console.log("activated listeners.");
-            let elms = document.querySelectorAll('.option textarea');
+            let elms = document.querySelectorAll('*[data-type="set-option"]');
             for (e of elms) {
                 let timeout;
                 e.addEventListener('input', function (el) {

@@ -59,10 +59,12 @@
       if (body.className.match("dark")) {
         body.className = "light"
         butt.innerHTML = "🌙"
+        loadsettings();
       }
       else {
         body.className = "dark"
         butt.innerHTML = "🌞"
+        loadsettings();
       }
     }
 
@@ -134,7 +136,7 @@
 <body class="light" id="body">
   <div class="switch">
     <input name="switch" id="one" type="radio" hx-get="/api/home" hx-trigger="click" hx-target=".main-content"
-      hx-swap="innerHTML swap:1s" tabindex="0" />
+      hx-swap="innerHTML" tabindex="0" />
     <label for="one" class="switch__label"> 🏡</label>
     <input name="switch" id="two" type="radio" hx-get="/api/create" hx-trigger="click" hx-target=".main-content"
       hx-swap="innerHTML" tabindex="1" checked />
@@ -150,7 +152,7 @@
     })
   </script>
   <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
-  <main class="main-content" data-content="home" hx-on::after-swap="changecontent();csshome()" hx-get="/api/create"
+  <main class="main-content" data-content="home" hx-on::after-swap="changecontent();csshome();" hx-get="/api/create"
     hx-trigger="load" hx-on:htmx:afterSwap="mason()">
     <br style="opacity: 0;">
     <article class="article">
