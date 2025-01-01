@@ -47,6 +47,15 @@
     padding-bottom: 1rem;
 }
 
+.images {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: 55vh;
+    width: 85vw;
+    box-shadow: 1px inset black;
+}
+
 input,
 button {
     border-radius: 3px;
